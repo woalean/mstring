@@ -11,6 +11,8 @@
 
 namespace mlib {
 
+const size_t npos = -1;
+
 class MString
 {
 public:
@@ -33,6 +35,8 @@ public:
     const size_t find(MString& str, size_t pos = 0) const;
 
     const size_t find(const char* s, size_t pos = 0) const;
+
+	MString substr(size_t pos = 0, size_t len = npos) const;
 
     bool empty() const;
 

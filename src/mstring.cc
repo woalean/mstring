@@ -4,8 +4,6 @@
 
 namespace mlib {
 
-static const size_t npos = -1;
-
 MString::MString() {
 	len_ = 0;
 	str_ = new char[1];
@@ -73,14 +71,15 @@ MString MString::operator+(const MString &rhs) {
     } 
 #endif
 	size_t len = strlen(rhs.str_) + len_;
-	char* temp = new char[len];
-	const char* result = temp;
-	memcpy(temp, str_, len_);
+	char* result = new char[len];
+	const char* itor = result;
+	memcpy(result, str_, len_);
 	for(int i = 0; i < len_ - 1; i++)
-		temp++;
-	*temp++ = ' ';
-	memcpy(temp, rhs.str_, strlen(rhs.str_)); 
-	MString rs(result);
+		result++;
+	*result++ = ' ';
+	memcpy(result, rhs.str_, strlen(rhs.str_));
+	MString rs(itor);
+	delete itor;
 	return rs;
 }
 
@@ -146,6 +145,36 @@ const size_t MString::find(const char* s, size_t pos) const {
     }
         
     return npos;
+}
+
+MString MString::substr(size_t pos, size_t len) const {
+	// return empty string if pos is equal to len_.
+	if(pos == len_) {
+		MString out("");
+		return out;
+	}
+	const char* result = NULL;
+	const char* old = str_;
+	char* itor = NULL;
+	int pos_ = pos;
+	if(pos < len_) {
+		while(pos_-- > 0) {
+			old++;
+		}
+		if(npos == len) {
+			itor = new char[len_ - pos];
+			memcpy(itor, old, len_ - pos);
+		}
+		if(len < len_ - pos) {
+			itor = new char[len];
+			memcpy(itor, old, len);
+		}
+		MString out(itor);
+
+		if(NULL != itor)
+			delete itor;
+		return out;
+	}
 }
 
 std::ostream& operator<<(std::ostream& os, MString& str) {

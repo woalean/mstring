@@ -39,6 +39,17 @@ class MstringTest {
             MString pst("str");
             std::cout<<"mstring str pos is :"<<str.find(pst)<<std::endl;
         }
+        void SubStrTest() {
+			MString str("Life was like a box of chocolates, you never know what you're going to get.");
+			MString result = str.substr(0,20);
+			MString result1 = str.substr(1);
+			MString result2 = str.substr(0,20);
+			MString result3 = str.substr(24,20);
+			std::cout<<"string result : "<<result<<std::endl;
+			std::cout<<"string result1 : "<<result1<<std::endl;
+			std::cout<<"string result2 : "<<result2<<std::endl;
+			std::cout<<"string result3 : "<<result3<<std::endl;
+		}
 };
 
 }
@@ -50,5 +61,6 @@ int main()
     test.operatorTest();
     test.AssignmentTest();
 	test.FindTest();
+	test.SubStrTest();
     return 0;
 }
