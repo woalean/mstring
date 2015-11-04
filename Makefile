@@ -2,8 +2,7 @@
 CC = g++
 CFLAGES = -Iinclude -Isrc
 VPATH = include:src:.
-OBJSDIR = .objs
-OBJS = mstring.o test_mstring.o
+OBJS = arena.o mstring.o test_main.o
 TARGET = test
 
 $(TARGET):$(OBJSDIR) $(OBJS)

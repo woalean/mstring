@@ -53,14 +53,3 @@ class MstringTest {
 };
 
 }
-
-int main()
-{
-    mlib::MstringTest test;
-    test.CopyTest();
-    test.operatorTest();
-    test.AssignmentTest();
-	test.FindTest();
-	test.SubStrTest();
-    return 0;
-}
